@@ -1,0 +1,222 @@
+# Sintetica Factory Demo Experience
+# "Factory Showcase" - Demonstrating System Capabilities
+
+meta:
+  name: "Factory Showcase"
+  slug: "factory-showcase"
+  type: "scrollytelling"
+  purpose: "Demonstrate Sintetica Factory capabilities through a mini-experience"
+  estimated_read_time: "3-5 minutes"
+  created: 2025-11-28
+
+# NARRATIVE ARC
+# Following the standard 5-act temperature journey
+
+narrative:
+  theme: "The transformation from chaos to compelling narrative"
+
+  prologue:
+    temperature: "cold"
+    title: "Do Caos à Clareza"
+    hook: "Você tem dados. Pesquisas. Ideias. Mas ninguém lê."
+    reveal_sequence:
+      - stage: 1
+        content: "80%"
+        label: "dos relatórios corporativos nunca são lidos até o fim"
+      - stage: 2
+        content: "7 segundos"
+        label: "é o tempo médio de atenção antes do scroll"
+      - stage: 3
+        content: "1"
+        label: "chance de criar uma primeira impressão"
+    punchline: "E se você pudesse transformar qualquer dado em uma jornada irresistível?"
+
+  act_1:
+    temperature: "cool"
+    title: "O Problema"
+    subtitle: "Por que ninguém lê seus documentos"
+    content:
+      - type: "stats_grid"
+        items:
+          - stat: "15 páginas"
+            label: "Relatório médio que ninguém lê"
+          - stat: "2 min"
+            label: "Tempo real de engajamento"
+          - stat: "3%"
+            label: "Leitores que chegam ao final"
+      - type: "pain_points"
+        items:
+          - "Informação densa sem hierarquia visual"
+          - "Ausência de ritmo narrativo"
+          - "Zero jornada emocional"
+          - "Parece com tudo que já existe"
+
+  breather_1:
+    type: "question"
+    question: "E se documentos funcionassem como experiências?"
+    subtext: "Como o NYT Snow Fall. Como a Apple Keynote. Como... cinema."
+
+  act_2:
+    temperature: "neutral"
+    title: "A Solução"
+    subtitle: "O Sistema de Temperatura Narrativa"
+    content:
+      - type: "temperature_demo"
+        temperatures:
+          - id: "cold"
+            name: "COLD"
+            mood: "Impacto, seriedade"
+            color: "#030810"
+            accent: "cyan"
+          - id: "cool"
+            name: "COOL"
+            mood: "Informativo, contexto"
+            color: "#050b14"
+            accent: "blue"
+          - id: "neutral"
+            name: "NEUTRAL"
+            mood: "Técnico, dados"
+            color: "#0f172a"
+            accent: "slate"
+          - id: "warm"
+            name: "WARM"
+            mood: "Histórias, humanização"
+            color: "#1a1a2e"
+            accent: "purple"
+          - id: "hot"
+            name: "HOT"
+            mood: "Urgência, tensão"
+            color: "#1a0a0a"
+            accent: "orange"
+
+  breather_2:
+    type: "stat"
+    stat: "5"
+    statLabel: "atos. 5 temperaturas. Uma jornada que transforma."
+
+  act_3:
+    temperature: "warm"
+    title: "Os Componentes"
+    subtitle: "35 peças. Infinitas combinações."
+    content:
+      - type: "component_showcase"
+        categories:
+          - name: "Core"
+            items: ["Act", "Breather", "ProgressNav", "HeroNumber"]
+          - name: "Display"
+            items: ["Hero", "Timeline", "Cheatsheet", "ExpertPanel"]
+          - name: "Data"
+            items: ["SkillsRadar", "ImpactStats", "MarketPulse"]
+          - name: "Interactive"
+            items: ["Calculator", "Assessment", "KnowledgeMap"]
+
+  breather_3:
+    type: "quote"
+    content: "O factory cria o scaffold. O humano adiciona a alma."
+    author: "Princípio Sintetica"
+
+  act_4:
+    temperature: "hot"
+    title: "O Resultado"
+    subtitle: "Métricas que importam"
+    content:
+      - type: "impact_stats"
+        items:
+          - stat: "+30%"
+            label: "Tempo na página"
+            trend: "up"
+          - stat: "+20%"
+            label: "Scroll até o final"
+            trend: "up"
+          - stat: "90+"
+            label: "Lighthouse Score"
+            trend: "target"
+
+  breather_4:
+    type: "silence"
+
+  act_5:
+    temperature: "cool"
+    title: "Os Agentes"
+    subtitle: "7 especialistas orquestrando cada detalhe"
+    content:
+      - type: "agents_grid"
+        agents:
+          - name: "Narrative Architect"
+            focus: "Estrutura dramática"
+            icon: "book"
+          - name: "Data Alchemist"
+            focus: "Extração de insights"
+            icon: "flask"
+          - name: "Visual Director"
+            focus: "Sistema de temperatura"
+            icon: "palette"
+          - name: "Experience Designer"
+            focus: "UX e scroll"
+            icon: "layout"
+          - name: "Content Curator"
+            focus: "Fact-checking e polish"
+            icon: "check"
+          - name: "Gestalt Guardian"
+            focus: "Hierarquia visual"
+            icon: "eye"
+          - name: "Production Engineer"
+            focus: "Build e deploy"
+            icon: "rocket"
+
+  epilogue:
+    temperature: "cold"
+    title: "Sua Vez"
+    content:
+      - type: "cta"
+        headline: "Transforme seu próximo relatório em uma experiência."
+        command: "*create {nome-do-projeto}"
+        subtext: "O factory está pronto. O que você vai criar?"
+
+# VISUAL DIRECTION
+visual:
+  aesthetic: "Cosmic Observatory"
+  fonts:
+    display: "Space Grotesk"
+    body: "DM Sans"
+    mono: "JetBrains Mono"
+
+  atmosphere:
+    - "Deep space gradients"
+    - "Floating orbs with blur"
+    - "Grid overlay patterns"
+    - "Vignette effect"
+
+# ANIMATIONS
+animations:
+  hero:
+    pattern: "Socratic Reveal"
+    stages: 6
+    total_duration: "12s"
+
+  sections:
+    reveal: "FadeInUp"
+    stagger: "100ms per item"
+
+  breathers:
+    quote: "Fade + scale"
+    stat: "Scale + glow"
+    silence: "Pulse dot"
+
+# IMPLEMENTATION NOTES
+implementation:
+  framework: "React + Tailwind"
+  build: "Vite"
+  deploy: "Vercel-ready"
+
+  files_to_generate:
+    - "index.html"
+    - "src/App.tsx"
+    - "src/components/Hero.tsx"
+    - "src/components/Act.tsx"
+    - "src/components/Breather.tsx"
+    - "src/components/TemperatureDemo.tsx"
+    - "src/components/AgentsGrid.tsx"
+    - "src/styles/globals.css"
+    - "tailwind.config.js"
+    - "package.json"
