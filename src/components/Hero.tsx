@@ -1,139 +1,162 @@
 import { useState, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 
-interface RevealStage {
-  number: string
-  label: string
-}
-
-const stages: RevealStage[] = [
-  { number: '80%', label: 'dos relatórios corporativos nunca são lidos até o fim' },
-  { number: '7s', label: 'é o tempo médio de atenção antes do scroll' },
-  { number: '1', label: 'chance de criar uma primeira impressão' },
-]
-
 export function Hero() {
   const [stage, setStage] = useState(0)
-  const [showScroll, setShowScroll] = useState(false)
+  const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = []
 
-    // Stage progression
-    timers.push(setTimeout(() => setStage(1), 1500))
-    timers.push(setTimeout(() => setStage(2), 4000))
-    timers.push(setTimeout(() => setStage(3), 6500))
-    timers.push(setTimeout(() => setStage(4), 9000))
-    timers.push(setTimeout(() => setStage(5), 11500))
-    timers.push(setTimeout(() => setShowScroll(true), 13000))
+    // The reveal sequence - each moment builds anticipation
+    timers.push(setTimeout(() => setStage(1), 800))    // "Você tem..."
+    timers.push(setTimeout(() => setStage(2), 2500))   // "dados"
+    timers.push(setTimeout(() => setStage(3), 3500))   // "pesquisas"
+    timers.push(setTimeout(() => setStage(4), 4500))   // "ideias"
+    timers.push(setTimeout(() => setStage(5), 6000))   // "Mas ninguém lê."
+    timers.push(setTimeout(() => setStage(6), 8500))   // Fade out question
+    timers.push(setTimeout(() => setStage(7), 9500))   // "E se..."
+    timers.push(setTimeout(() => setStage(8), 12000))  // Main title
+    timers.push(setTimeout(() => setShowContent(true), 13500))
 
     return () => timers.forEach(clearTimeout)
   }, [])
 
   const skipToEnd = () => {
-    setStage(5)
-    setShowScroll(true)
+    setStage(8)
+    setShowContent(true)
   }
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center bg-cold-bg overflow-hidden cursor-pointer"
-      onClick={skipToEnd}
+      id="hero"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden cursor-pointer"
+      onClick={stage < 8 ? skipToEnd : undefined}
     >
-      {/* Atmospheric layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cold-bg via-cold-bg to-cool-bg" />
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-cyan-900/10 blur-[150px] rounded-full" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 blur-[150px] rounded-full" />
+      {/* Deep space background */}
+      <div className="absolute inset-0 bg-[#020408]" />
+
+      {/* Radial glow from center */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/5 blur-[200px] rounded-full" />
 
       {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.7)_100%)]" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        {/* Opening question */}
-        <div
-          className={`transition-all duration-1000 ${
-            stage >= 1 && stage < 5 ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          {stage < 5 && (
-            <p className="text-xl md:text-2xl text-slate-400 mb-16 font-light">
-              Você tem dados. Pesquisas. Ideias.{' '}
-              <span className="text-cyan-400">Mas ninguém lê.</span>
-            </p>
-          )}
-        </div>
 
-        {/* Staged number reveals */}
-        {stage >= 1 && stage < 5 && (
-          <div className="space-y-12">
-            {stages.map((item, index) => (
-              <div
-                key={index}
-                className={`transition-all duration-1000 ${
-                  stage > index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-              >
-                <span className="block text-7xl md:text-9xl font-display font-bold text-gradient-cyan">
-                  {item.number}
-                </span>
-                <span className="block text-lg md:text-xl text-slate-400 mt-2">
-                  {item.label}
-                </span>
-              </div>
-            ))}
+        {/* Phase 1: The Problem Statement */}
+        {stage >= 1 && stage < 6 && (
+          <div className="space-y-4">
+            {/* "Você tem..." */}
+            <p className={`text-2xl md:text-3xl text-slate-400 font-light transition-all duration-1000 ${
+              stage >= 1 ? 'opacity-100' : 'opacity-0'
+            }`}>
+              Você tem...
+            </p>
+
+            {/* The three things */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 my-8">
+              <span className={`text-4xl md:text-6xl font-display font-bold text-white transition-all duration-700 ${
+                stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                dados
+              </span>
+              <span className={`text-4xl md:text-6xl font-display font-bold text-white transition-all duration-700 ${
+                stage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                pesquisas
+              </span>
+              <span className={`text-4xl md:text-6xl font-display font-bold text-white transition-all duration-700 ${
+                stage >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                ideias
+              </span>
+            </div>
+
+            {/* The punchline */}
+            <p className={`text-3xl md:text-5xl font-display font-bold transition-all duration-1000 ${
+              stage >= 5 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}>
+              <span className="text-slate-500">Mas </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+                ninguém lê.
+              </span>
+            </p>
           </div>
         )}
 
-        {/* Final reveal */}
-        <div
-          className={`transition-all duration-1500 ${
-            stage >= 5 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}
-        >
-          {stage >= 5 && (
-            <>
-              {/* Giant ghost number */}
-              <div className="relative mb-8">
-                <span className="text-[12rem] md:text-[18rem] font-display font-black text-ghost leading-none">
-                  80%
+        {/* Phase 2: The Transformation Promise */}
+        {stage >= 7 && stage < 8 && (
+          <div className={`transition-all duration-1500 ${
+            stage >= 7 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <p className="text-2xl md:text-4xl text-slate-300 font-light leading-relaxed">
+              E se você pudesse transformar tudo isso em
+              <br />
+              <span className="text-cyan-400 font-medium">
+                experiências que ninguém consegue parar de consumir?
+              </span>
+            </p>
+          </div>
+        )}
+
+        {/* Phase 3: The Identity Reveal */}
+        {stage >= 8 && (
+          <div className={`transition-all duration-1500 ${
+            stage >= 8 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+          }`}>
+            {/* The name */}
+            <div className="relative mb-6">
+              {/* Ghost text behind */}
+              <span className="absolute inset-0 text-6xl md:text-8xl lg:text-9xl font-display font-black text-cyan-400/5 blur-xl flex items-center justify-center">
+                SINTÉTICA
+              </span>
+
+              {/* Main title */}
+              <h1 className="relative text-6xl md:text-8xl lg:text-9xl font-display font-black">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500">
+                  SINTÉTICA
                 </span>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[12rem] md:text-[18rem] font-display font-black text-cyan-400/5 blur-2xl">
-                    80%
-                  </span>
-                </div>
-              </div>
-
-              {/* Title */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
-                <span className="text-gradient-cyan">Do Caos</span>
-                <span className="text-white"> à </span>
-                <span className="text-gradient-cyan">Clareza</span>
               </h1>
+            </div>
 
-              {/* Punchline */}
-              <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
-                E se você pudesse transformar qualquer dado em uma{' '}
-                <span className="text-cyan-400 font-medium">jornada irresistível</span>?
-              </p>
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-slate-400 font-light mb-4">
+              Factory
+            </p>
 
-              {/* Subtitle */}
-              <p className="text-sm md:text-base text-slate-500 mt-8 font-mono uppercase tracking-[0.2em]">
-                Sintetica Factory — Sistema de Experiências Narrativas
-              </p>
-            </>
-          )}
-        </div>
+            {/* Tagline */}
+            <p className={`text-lg md:text-xl text-slate-500 max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
+              showContent ? 'opacity-100' : 'opacity-0'
+            }`}>
+              O sistema que transmuta complexidade em jornadas irresistíveis.
+            </p>
+
+            {/* What I am - quick summary */}
+            <div className={`mt-12 flex flex-wrap justify-center gap-6 text-sm font-mono uppercase tracking-wider transition-all duration-1000 delay-700 ${
+              showContent ? 'opacity-100' : 'opacity-0'
+            }`}>
+              <span className="text-cyan-400/70">Scrollytelling</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-blue-400/70">Narrativa</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-purple-400/70">Experiência</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-orange-400/70">Transformação</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Scroll indicator */}
-      <div
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 ${
-          showScroll ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <ChevronDown className="w-6 h-6 text-cyan-400 animate-bounce" />
+      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-1000 ${
+        showContent ? 'opacity-100' : 'opacity-0'
+      }`}>
+        <span className="text-xs font-mono text-slate-600 uppercase tracking-widest">
+          Scroll para descobrir
+        </span>
+        <ChevronDown className="w-5 h-5 text-cyan-400/50 animate-bounce" />
       </div>
     </section>
   )
